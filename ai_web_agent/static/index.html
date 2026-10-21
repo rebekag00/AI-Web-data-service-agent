@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Annual Report Finder</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand-mark" aria-hidden="true">AR</div>
+      <div><p class="eyebrow">NO-KEY WEB AGENT</p><h1>Annual Report Finder</h1></div>
+      <div class="system-status"><span></span> Local mode</div>
+    </header>
+    <main>
+      <section class="intro">
+        <div><p class="section-label">ONE PROMPT</p><h2>Ask for a company report. The agent handles the rest.</h2></div>
+        <p class="intro-copy">It searches the public web, opens candidate sources, verifies the company and year, retries when a result is wrong, then extracts and organizes the annual report in Excel.</p>
+      </section>
+      <div class="workspace">
+        <form id="run-form" class="panel form-panel">
+          <div class="field">
+            <label for="prompt">What do you want to find?</label>
+            <textarea id="prompt" rows="7" required>I want to see the annual report for ERSTE DIGITAL GMBH 2025</textarea>
+            <p class="hint">Write naturally in English, Czech, German, Slovak, Polish, French, or another supported language. Include the company and year.</p>
+          </div>
+          <div class="agent-route" aria-label="Agent workflow">
+            <span>Search</span><b>→</b><span>Open</span><b>→</b><span>Validate</span><b>↻</b><span>Excel</span>
+          </div>
+          <button id="run-button" type="submit">Find and verify report</button>
+          <p class="privacy-note">Runs locally. Web pages remain untrusted input and private-network URLs are blocked.</p>
+        </form>
+        <section class="panel result-panel" aria-live="polite">
+          <div class="result-heading">
+            <div><p class="section-label">AGENT RESULT</p><h2 id="result-title">Ready to search</h2></div>
+            <span id="run-state" class="state state-idle">Idle</span>
+          </div>
+          <div id="empty-state" class="empty-state">
+            <div><div class="empty-icon" aria-hidden="true">⌕</div><p>Run the example to see the interpreted request, each retry, validation checks, selected source, and Excel download.</p></div>
+          </div>
+          <div id="result-content" class="hidden">
+            <dl class="metrics">
+              <div><dt>Company</dt><dd id="company">—</dd></div>
+              <div><dt>Year</dt><dd id="year">—</dd></div>
+              <div><dt>Prompt → search</dt><dd id="language">—</dd></div>
+              <div><dt>Attempts</dt><dd id="attempt-count">0</dd></div>
+            </dl>
+            <div id="message" class="message hidden"></div>
+            <div id="validation" class="validation hidden"></div>
+            <div id="attempts" class="attempts"></div>
+            <div id="records" class="records"></div>
+            <a id="excel-link" class="download hidden" href="#" download>Download organized annual report</a>
+          </div>
+        </section>
+      </div>
+    </main>
+    <script src="/app.js" defer></script>
+  </body>
+</html>
